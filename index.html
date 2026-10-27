@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Samantha's Sketchbook • A Special Story</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600&family=Special+Elite&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- 2. MIDDLE LAYER: Stage Fit Wrapper & Physical Hero Scrapbook -->
+  <div id="fit">
+    <div id="stage">
+      <!--
+        #book-group is the single element that gets translated (translateX) to
+        centre the closed cover / open spread / back cover. Because spiral-back,
+        .book and spiral-front are ALL children of this group they always move
+        together, so the rings sit exactly on the spine edge at every state.
+      -->
+      <div id="book-group">
+        <!-- Spiral back-half: z-index 3, behind .book (z:4). -->
+        <div class="spiral-back" id="spiral-back"></div>
+
+        <div class="book">
+          <div class="inner" id="inner">
+            <!-- 3D Book Sheets rendered by main.js -->
+          </div>
+        </div>
+
+        <!-- Spiral front-half: z-index 500, always in front of every sheet. -->
+        <div class="spiral-front" id="spiral-front"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outside Invitation: "TAP TO OPEN" -->
+  <div id="tap-invitation" class="tap-invitation">
+    <span class="tap-text">TAP TO OPEN</span>
+    <div class="gold-divider-line">
+      <span class="gold-diamond">✦</span>
+      <span class="line"></span>
+      <span class="gold-diamond">✦</span>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation & Audio Controls -->
+  <nav class="nav">
+    <button id="prev" aria-label="Previous page">‹</button>
+    <div class="dots" id="dots"></div>
+    <button id="next" aria-label="Next page">›</button>
+
+    <button id="music-btn" class="music-btn" aria-label="Toggle Music" title="Toggle Music">
+      <span id="music-icon">🎵</span>
+      <span id="music-label">Music Off</span>
+    </button>
+  </nav>
+
+  <div class="tip">tip: turn your phone sideways or swipe/tap to turn pages</div>
+
+  <!-- SVG Filters & Gradients for Photorealistic Antique Paper Edge Deckling & Stickers -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+    <defs>
+      <!-- Butterfly & Sticker Gradients -->
+      <linearGradient id="wing-pink" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f472b6" />
+        <stop offset="100%" stop-color="#db2777" />
+      </linearGradient>
+      <linearGradient id="wing-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fef08a" />
+        <stop offset="100%" stop-color="#d97706" />
+      </linearGradient>
+      <radialGradient id="disco-grad" cx="40%" cy="30%" r="70%">
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="50%" stop-color="#cbd5e1" />
+        <stop offset="100%" stop-color="#64748b" />
+      </radialGradient>
+
+      <!-- Paper Deckled Irregular Edge Warp Filter -->
+      <filter id="paper-edge-warp" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="4" result="edgeNoise" />
+        <feDisplacementMap in="SourceGraphic" in2="edgeNoise" scale="9" xChannelSelector="R" yChannelSelector="G" result="warpedEdge" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Proposal Overlay Modal: Magical Lantern Night Sky, Birthday Wish Card & Vintage Handwritten Letter -->
+  <div class="pop" id="pop" role="dialog" aria-modal="true">
+    <button id="pop-close" class="pop-close-btn" aria-label="Close letter" title="Close letter">✕</button>
+
+    <!-- Lantern Ambient Light Vignette Layer -->
+    <div class="pop-lantern-glow"></div>
+    <div class="pop-lantern-foreground" id="pop-lantern-fg"></div>
+
+    <video class="pop-video" id="pop-video" autoplay loop muted playsinline>
+      <source src="/gemini_generated_video_bf2f11f4.mp4" type="video/mp4" />
+    </video>
+    <div class="pop-video-overlay"></div>
+
+    <!-- Step 1: Birthday Wish Card & Celebration Effects -->
+    <div class="birthday-wish-card" id="bday-wish-card">
+      <div class="wish-icon">🎂✨</div>
+      <h2 class="wish-title">Happy Birthday, Samantha! 🎉</h2>
+      <p class="wish-subtitle">Celebrating a true queen of cinema! May your life be filled with endless blockbuster joy, magic, health, and stardom. 🎬✨</p>
+      <button id="read-letter-btn" class="btn-read-letter">
+        <span>Read My Letter For You 💌</span>
+      </button>
+    </div>
+
+    <!-- Step 2: Authentic Photorealistic Antique Aged Parchment Letter Sheet -->
+    <div class="vintage-letter-paper" id="vintage-letter" style="display:none">
+      <!-- Hyper-realistic Paper Fibers, Grain, Creases & Stains -->
+      <div class="paper-texture"></div>
+      <div class="paper-fiber-threads"></div>
+      <div class="paper-tea-stain-ring ring-1"></div>
+      <div class="paper-tea-stain-ring ring-2"></div>
+      <div class="paper-water-spot"></div>
+      <div class="paper-crease-horizontal line-1"></div>
+      <div class="paper-crease-horizontal line-2"></div>
+      <div class="paper-corner-curl"></div>
+
+      <!-- Handwritten Letter Content (Sepia Fountain Pen Ink) -->
+      <div id="lines" class="lines-container handwritten-body"></div>
+      <h1 id="q" class="question-heading handwritten-question"></h1>
+      <div id="final-msg" class="lines-container handwritten-body" style="margin-top:14px"></div>
+
+      <!-- Interactive Proposal Action Buttons (Yes & Runaway No) -->
+      <div class="proposal-btn-group" id="proposal-btn-group">
+        <button id="btn-yes" class="btn-proposal btn-yes">Yes 💖</button>
+        <button id="btn-no" class="btn-proposal btn-no">No 🙈</button>
+      </div>
+
+      <!-- Celebration Success Card -->
+      <div id="proposal-success-card" class="proposal-success-card" style="display:none;">
+        <div class="success-icon">💖🎉✨</div>
+        <h3 class="success-title">She Said YES!</h3>
+        <p class="success-text">Thank you for making cinema and life so magical!</p>
+      </div>
+
+      <!-- Vintage Wax Seal & Dried Pressed Rose Petal Footer -->
+      <div class="letter-footer-seal">
+        <div class="authentic-wax-seal">
+          <div class="wax-seal-inner">
+            <span class="wax-seal-initials">S & V</span>
+            <span class="wax-seal-heart">❤</span>
+          </div>
+        </div>
+        <div class="dried-rose-petal" title="Pressed Rose Petal">
+          <svg viewBox="0 0 45 45" class="petal-svg">
+            <path d="M22 6 C32 2, 42 12, 35 28 C28 38, 18 40, 10 32 C4 24, 10 8, 22 6 Z" fill="#9f1239" opacity="0.85" />
+            <path d="M22 6 C26 14, 24 28, 10 32" fill="none" stroke="#680c23" stroke-width="1" opacity="0.65" />
+            <path d="M22 6 C30 18, 35 28, 35 28" fill="none" stroke="#680c23" stroke-width="0.8" opacity="0.45" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Scroll-down indicator — fades out when user reaches the bottom -->
+      <div class="letter-scroll-hint" id="letter-scroll-hint">
+        <span class="scroll-label">scroll to read more</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
