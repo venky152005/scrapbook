@@ -22,7 +22,6 @@
  */
 
 const R = (f) => `/stickers/rapunzel/${f}`;
-const S = (f) => `/stickers/${f}`;
 
 /**
  * @typedef {{ src:string, x:number, y:number, w:number, rotate:number, draggable:boolean }} StickerDef
@@ -110,10 +109,7 @@ export const STICKER_MAP = {
   ],
 
   /* ── Face 9: Back Cover (dark) ─────────────────────────────────────────── */
-  // 9: [
-  //   // Sun icon centred above text
-  //   { src: R('10_sun_icon.png'), x: 130, y: 90, w: 80, rotate: 0, draggable: false },
-  // ],
+  9: []
 };
 
 /**

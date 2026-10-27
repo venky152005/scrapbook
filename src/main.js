@@ -1,4 +1,4 @@
-import { NAME, NOTE, MEM, LETTER } from './memories.js';
+import { NAME } from './memories.js';
 import { LINES, QUESTION, FINAL_MESSAGE } from './proposal.js';
 import { renderStickers } from './stickerLayout.js';
 import './style.css';
@@ -37,28 +37,6 @@ window.addEventListener('resize', enforceDesktopSiteMode);
 window.addEventListener('orientationchange', () => setTimeout(enforceDesktopSiteMode, 150));
 
 // ── Ephemera Helper Components & SVG Definitions ─────────────────────────────
-
-const svgDefs = `
-<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-  <defs>
-    <linearGradient id="wing-pink" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f472b6" />
-      <stop offset="100%" stop-color="#db2777" />
-    </linearGradient>
-    <linearGradient id="wing-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fef08a" />
-      <stop offset="100%" stop-color="#d97706" />
-    </linearGradient>
-    <radialGradient id="disco-grad" cx="40%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="50%" stop-color="#cbd5e1" />
-      <stop offset="100%" stop-color="#64748b" />
-    </radialGradient>
-  </defs>
-</svg>
-`;
-
-
 
 // Sketched Lantern & Sparkles SVG
 const handDoodlesSVG = (left, top, type = 'lantern', rot = 0) => {
@@ -191,7 +169,6 @@ const paperScrapHTML = (type = 'map', styleStr = '') => {
 };
 
 const cover = `
-    ${svgDefs}
   <!-- ══ SCRAPBOOK COVER — FLOWER COLLAGE ══ -->
 
   <!-- ── Bouquet: 6 flower images layered as a center-upper arrangement ── -->
@@ -495,7 +472,7 @@ const S = [
   [p8, back],
 ];
 
-// â”€â”€ Continuous 3D Metal Spiral SVG Generator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Continuous 3D Metal Spiral SVG Generator ────────────────────────────────
 function renderRealisticSpiralBinding() {
   const ringBackEl = document.getElementById('spiral-back');
   const ringFrontEl = document.getElementById('spiral-front');
@@ -614,7 +591,7 @@ function renderRealisticSpiralBinding() {
   ringFrontEl.innerHTML = frontSVG;
 }
 
-// â”€â”€ Boot â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ────────────────────────────────────────────────────────────────────────────
 
 // -- Image Preloader ----------------------------------------------------------
 const ALL_IMAGE_URLS = [
@@ -726,10 +703,10 @@ function bootApp() {
 
   const N = S.length;
 
-  // â”€â”€ Render 3D Continuous SVG Metal Spiral â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ────────────────────────────────────────────────────────────────────────────
   renderRealisticSpiralBinding();
 
-  // â”€â”€ Build sheet DOM & add stickers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ────────────────────────────────────────────────────────────────────────────
   inner.innerHTML = S.map((spread, i) => `
     <div class="sheet">
       <div class="face f p${(i * 2) % 4 + 1}${i === 0 ? ' dark' : ''}"></div>
@@ -753,7 +730,7 @@ function bootApp() {
     renderStickers(backFace, i * 2 + 1);
   });
 
-  // â”€â”€ Navigation dots â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ────────────────────────────────────────────────────────────────────────────
   const dots = document.getElementById('dots');
   dots.innerHTML = Array.from({ length: N + 1 }, () => '<b></b>').join('');
 
@@ -802,7 +779,7 @@ function bootApp() {
 
   view();
 
-  // â”€â”€ Stage scale fit â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ────────────────────────────────────────────────────────────────────────────
   let sc = 1;
   function fit() {
     sc = Math.min((window.innerWidth - 16) / 680, (window.innerHeight - 120) / 460, 1.7);
@@ -817,7 +794,7 @@ function bootApp() {
   window.addEventListener('resize', fit);
   fit();
 
-  // â”€â”€ Sticker drag + swipe â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ────────────────────────────────────────────────────────────────────────────
   const bk = document.getElementById('stage');
   let sx = null;
 
@@ -863,16 +840,13 @@ function bootApp() {
     });
   }
 
-  // â”€â”€ Audio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Audio ───────────────────────────────────────────────────────────────────
   initAudioPlayer();
 
-  // â”€â”€ Proposal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Proposal ────────────────────────────────────────────────────────────────
   initProposalFlow();
 
-  // â”€â”€ 3-Layer Cinematic Environment & Parallax â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  initBackgroundVideo();
-  renderFloralGarden();
-  renderFallingPetals();
+  // ── Stage Parallax & Opening Triggers ──
   initParallaxAndOpening();
 }
 
@@ -890,265 +864,17 @@ function startBirthdayWishingEffects() {
   }
 }
 
-// â”€â”€ Background Video Controller â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function initBackgroundVideo() {
-  const video = document.getElementById('bg-video');
-  if (!video) return;
-
-  video.muted = true;
-  video.play().catch(() => {
-    window.addEventListener('pointerdown', () => video.play(), { once: true });
-  });
-}
-
-// â”€â”€ Photorealistic Botanical Garden Generator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function renderFloralGarden() {
-  const gardenFloor = document.getElementById('garden-floor');
-  const gardenBack = document.getElementById('garden-back');
-  const gardenMid = document.getElementById('garden-mid');
-  const gardenFront = document.getElementById('garden-front');
-
-  if (!gardenBack || !gardenMid || !gardenFront) return;
-
-  // Dark Soil & Grass Base Floor
-  if (gardenFloor) {
-    gardenFloor.innerHTML = `
-      <svg viewBox="0 0 1200 240" preserveAspectRatio="none" style="width:100%;height:100%">
-        <path d="M0 240 L0 175 Q 200 165 400 185 Q 600 195 800 175 Q 1000 165 1200 180 L1200 240 Z" fill="#030107" />
-        <path d="M0 240 L0 190 Q 300 175 600 195 Q 900 180 1200 200 L1200 240 Z" fill="#090412" />
-        <!-- Micro Grass Blades Base -->
-        <path d="M20 180 L25 160 L30 182 M50 185 L54 162 L60 188 M80 178 L85 155 L90 180 M110 182 L115 160 L120 185" stroke="#143818" stroke-width="2" />
-        <path d="M1080 180 L1085 160 L1090 182 M1110 185 L1114 162 L1120 188 M1140 178 L1145 155 L1150 180" stroke="#143818" stroke-width="2" />
-      </svg>
-    `;
-  }
-
-  // Back Layer: Soft Blurred Background Foliage Silhouettes
-  gardenBack.innerHTML = `
-    <svg viewBox="0 0 1200 240" preserveAspectRatio="none" style="width:100%;height:100%">
-      <!-- Left Silhouette -->
-      <path d="M-30 240 C 40 120, 120 60, 260 100 C 330 125, 360 180, 440 240 Z" fill="#0a0515" />
-      <path d="M30 240 Q 110 70 170 40 Q 220 100 270 240" fill="#100820" />
-      <!-- Right Silhouette -->
-      <path d="M1230 240 C 1160 120, 1080 60, 940 100 C 870 125, 840 180, 760 240 Z" fill="#0a0515" />
-      <path d="M1170 240 Q 1100 70 1030 40 Q 980 100 930 240" fill="#100820" />
-    </svg>
-  `;
-
-  // Mid Layer: Photorealistic Botanical Flowers with Warm Lantern Light Highlights & Dew Drops
-  gardenMid.innerHTML = `
-    <svg viewBox="0 0 1200 240" preserveAspectRatio="none" style="width:100%;height:100%">
-      <defs>
-        <!-- Purple Dahlia Multi-Tone Radial Gradient -->
-        <radialGradient id="dahlia-purple-grad" cx="48%" cy="48%" r="52%">
-          <stop offset="0%" stop-color="#fae8ff" />
-          <stop offset="25%" stop-color="#e9d5ff" />
-          <stop offset="50%" stop-color="#c084fc" />
-          <stop offset="78%" stop-color="#7e22ce" />
-          <stop offset="100%" stop-color="#3b0764" />
-        </radialGradient>
-        <!-- Pink Garden Rose Multi-Tone Gradient -->
-        <radialGradient id="rose-pink-grad" cx="42%" cy="42%" r="58%">
-          <stop offset="0%" stop-color="#fef08a" />
-          <stop offset="22%" stop-color="#f472b6" />
-          <stop offset="60%" stop-color="#db2777" />
-          <stop offset="88%" stop-color="#9d174d" />
-          <stop offset="100%" stop-color="#4c0519" />
-        </radialGradient>
-        <!-- Leaf Organic Gradient with Golden Lantern Top Highlight -->
-        <linearGradient id="leaf-grad-left" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#fff0aa" />
-          <stop offset="18%" stop-color="#4ade80" />
-          <stop offset="55%" stop-color="#15803d" />
-          <stop offset="100%" stop-color="#022c22" />
-        </linearGradient>
-        <linearGradient id="leaf-grad-right" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#fff0aa" />
-          <stop offset="18%" stop-color="#4ade80" />
-          <stop offset="55%" stop-color="#15803d" />
-          <stop offset="100%" stop-color="#022c22" />
-        </linearGradient>
-      </defs>
-
-      <!-- LEFT SIDE BOTANICAL BOUQUET (0% to 32% Width) -->
-      <g filter="drop-shadow(4px 8px 14px rgba(0,0,0,0.7))">
-        <!-- Deep Leaves & Vine Stems with Vein Shading -->
-        <path d="M 0 240 C 60 130, 160 110, 270 185 C 190 210, 95 220, 0 240 Z" fill="url(#leaf-grad-left)" stroke="rgba(255,240,170,0.6)" stroke-width="1.2" />
-        <path d="M 10 240 C 120 170, 220 150, 260 180" fill="none" stroke="#22543d" stroke-width="1.5" />
-        <path d="M 40 240 C 110 100, 195 80, 235 145 C 165 180, 95 195, 40 240 Z" fill="url(#leaf-grad-left)" stroke="rgba(255,240,170,0.6)" stroke-width="1" />
-
-        <!-- Lavender Stems & Multi-Faceted 3D Buds -->
-        <g transform="translate(100, 55)">
-          <path d="M0 185 Q 5 -25 10 -65" fill="none" stroke="#2e1065" stroke-width="3.5" />
-          <circle cx="10" cy="-65" r="5.5" fill="#f5d0fe" stroke="#ffd98a" stroke-width="0.9" />
-          <circle cx="7" cy="-52" r="6.5" fill="#e9d5ff" />
-          <circle cx="13" cy="-39" r="7" fill="#c084fc" />
-          <circle cx="6" cy="-26" r="7.5" fill="#a855f7" />
-          <circle cx="14" cy="-13" r="8" fill="#7e22ce" />
-        </g>
-        <g transform="translate(155, 40)">
-          <path d="M0 200 Q 8 -30 12 -75" fill="none" stroke="#2e1065" stroke-width="3.5" />
-          <circle cx="12" cy="-75" r="6" fill="#f472b6" stroke="#ffd98a" stroke-width="0.9" />
-          <circle cx="8" cy="-60" r="7" fill="#f5d0fe" />
-          <circle cx="15" cy="-45" r="7.5" fill="#e9d5ff" />
-          <circle cx="7" cy="-30" r="8" fill="#c084fc" />
-          <circle cx="16" cy="-15" r="8.5" fill="#7e22ce" />
-        </g>
-
-        <!-- Photorealistic Multi-Layered Purple Dahlia -->
-        <g transform="translate(210, 120)">
-          <!-- Outer Petal Layer (12 Curved Bezier Petals) -->
-          <path d="M0 -38 C 16 -24, 16 24, 0 38 C -16 24, -16 -24, 0 -38 Z" fill="url(#dahlia-purple-grad)" stroke="rgba(255,240,170,0.8)" stroke-width="0.8" />
-          <path d="M-38 0 C -24 16, 24 16, 38 0 C 24 -16, -24 -16, -38 0 Z" fill="url(#dahlia-purple-grad)" stroke="rgba(255,240,170,0.8)" stroke-width="0.8" />
-          <path d="M-27 -27 C -12 -35, 24 -12, 27 27 C 12 35, -24 12, -27 -27 Z" fill="url(#dahlia-purple-grad)" stroke="rgba(255,240,170,0.8)" stroke-width="0.8" />
-          <path d="M27 -27 C 35 -12, 12 24, -27 27 C -35 12, -12 -24, 27 -27 Z" fill="url(#dahlia-purple-grad)" stroke="rgba(255,240,170,0.8)" stroke-width="0.8" />
-          <!-- Mid Petal Layer -->
-          <path d="M0 -26 C 11 -16, 11 16, 0 26 C -11 16, -11 -16, 0 -26 Z" fill="#c084fc" opacity="0.9" />
-          <path d="M-26 0 C -16 11, 16 11, 26 0 C 16 -11, -16 -11, -26 0 Z" fill="#c084fc" opacity="0.9" />
-          <!-- Center Stamen & Dew Drops -->
-          <circle cx="0" cy="0" r="14" fill="#e9d5ff" />
-          <circle cx="0" cy="0" r="8.5" fill="#fef08a" />
-          <circle cx="0" cy="0" r="4.5" fill="#ca8a04" />
-          <!-- Dew Drop Highlight -->
-          <circle cx="-12" cy="-14" r="2.2" fill="rgba(255,255,255,0.85)" />
-          <circle cx="-10" cy="-13" r="1.2" fill="#ffffff" />
-        </g>
-
-        <!-- Photorealistic Pink Garden Rose -->
-        <g transform="translate(120, 145)">
-          <path d="M-30 -12 C -18 -34, 24 -28, 30 -6 C 36 18, 6 34, -18 28 C -34 18, -34 -6, -30 -12 Z" fill="url(#rose-pink-grad)" stroke="rgba(255,240,170,0.85)" stroke-width="1" />
-          <circle cx="0" cy="0" r="20" fill="#f472b6" />
-          <circle cx="0" cy="0" r="12" fill="#fde047" />
-          <circle cx="0" cy="0" r="6" fill="#d97706" />
-          <!-- Dew Drop -->
-          <circle cx="8" cy="-10" r="2" fill="rgba(255,255,255,0.85)" />
-        </g>
-
-        <!-- Baby's Breath & Wildflower Star Clusters -->
-        <g transform="translate(50, 75)">
-          <circle cx="10" cy="10" r="3.8" fill="#ffffff" stroke="#ffd98a" stroke-width="0.5" />
-          <circle cx="26" cy="4" r="4.2" fill="#ffd98a" />
-          <circle cx="42" cy="16" r="3.8" fill="#ffffff" stroke="#ffd98a" stroke-width="0.5" />
-          <circle cx="58" cy="8" r="4.2" fill="#ffd98a" />
-        </g>
-      </g>
-
-      <!-- RIGHT SIDE BOTANICAL BOUQUET (68% to 100% Width) -->
-      <g filter="drop-shadow(-4px 8px 14px rgba(0,0,0,0.7))">
-        <!-- Deep Leaves & Vine Stems with Vein Shading -->
-        <path d="M 1200 240 C 1140 130, 1040 110, 930 185 C 1010 210, 1105 220, 1200 240 Z" fill="url(#leaf-grad-right)" stroke="rgba(255,240,170,0.6)" stroke-width="1.2" />
-        <path d="M 1190 240 C 1080 170, 980 150, 940 180" fill="none" stroke="#22543d" stroke-width="1.5" />
-        <path d="M 1160 240 C 1090 100, 1005 80, 965 145 C 1035 180, 1105 195, 1160 240 Z" fill="url(#leaf-grad-right)" stroke="rgba(255,240,170,0.6)" stroke-width="1" />
-
-        <!-- Lavender Stems & Multi-Faceted Buds -->
-        <g transform="translate(1100, 55)">
-          <path d="M0 185 Q -5 -25 -10 -65" fill="none" stroke="#2e1065" stroke-width="3.5" />
-          <circle cx="-10" cy="-65" r="5.5" fill="#f5d0fe" stroke="#ffd98a" stroke-width="0.9" />
-          <circle cx="-7" cy="-52" r="6.5" fill="#e9d5ff" />
-          <circle cx="-13" cy="-39" r="7" fill="#c084fc" />
-          <circle cx="-6" cy="-26" r="7.5" fill="#a855f7" />
-          <circle cx="-14" cy="-13" r="8" fill="#7e22ce" />
-        </g>
-
-        <!-- Photorealistic Multi-Layered Purple Dahlia -->
-        <g transform="translate(990, 120)">
-          <path d="M0 -38 C 16 -24, 16 24, 0 38 C -16 24, -16 -24, 0 -38 Z" fill="url(#dahlia-purple-grad)" stroke="rgba(255,240,170,0.8)" stroke-width="0.8" />
-          <path d="M-38 0 C -24 16, 24 16, 38 0 C 24 -16, -24 -16, -38 0 Z" fill="url(#dahlia-purple-grad)" stroke="rgba(255,240,170,0.8)" stroke-width="0.8" />
-          <path d="M-27 -27 C -12 -35, 24 -12, 27 27 C 12 35, -24 12, -27 -27 Z" fill="url(#dahlia-purple-grad)" stroke="rgba(255,240,170,0.8)" stroke-width="0.8" />
-          <path d="M27 -27 C 35 -12, 12 24, -27 27 C -35 12, -12 -24, 27 -27 Z" fill="url(#dahlia-purple-grad)" stroke="rgba(255,240,170,0.8)" stroke-width="0.8" />
-          <circle cx="0" cy="0" r="14" fill="#e9d5ff" />
-          <circle cx="0" cy="0" r="8.5" fill="#fef08a" />
-          <circle cx="0" cy="0" r="4.5" fill="#ca8a04" />
-          <!-- Dew Drop -->
-          <circle cx="12" cy="-14" r="2.2" fill="rgba(255,255,255,0.85)" />
-        </g>
-
-        <!-- Photorealistic Pink Garden Rose -->
-        <g transform="translate(1080, 145)">
-          <path d="M-30 -12 C -18 -34, 24 -28, 30 -6 C 36 18, 6 34, -18 28 C -34 18, -34 -6, -30 -12 Z" fill="url(#rose-pink-grad)" stroke="rgba(255,240,170,0.85)" stroke-width="1" />
-          <circle cx="0" cy="0" r="20" fill="#f472b6" />
-          <circle cx="0" cy="0" r="12" fill="#fde047" />
-          <circle cx="0" cy="0" r="6" fill="#d97706" />
-        </g>
-
-        <!-- Wildflower Star Clusters -->
-        <g transform="translate(1130, 75)">
-          <circle cx="-10" cy="10" r="3.8" fill="#ffffff" stroke="#ffd98a" stroke-width="0.5" />
-          <circle cx="-26" cy="4" r="4.2" fill="#ffd98a" />
-          <circle cx="-42" cy="16" r="3.8" fill="#ffffff" stroke="#ffd98a" stroke-width="0.5" />
-        </g>
-      </g>
-    </svg>
-  `;
-
-  // Front Layer: Shallow Depth-of-Field Large Foreground Corner Flowers
-  gardenFront.innerHTML = `
-    <svg viewBox="0 0 1200 240" preserveAspectRatio="none" style="width:100%;height:100%">
-      <!-- Bottom Left Large Foreground Dahlia (Entering Frame) -->
-      <g transform="translate(-10, 50)">
-        <path d="M 0 190 C 90 100, 190 90, 290 190 Z" fill="#15803d" stroke="#fef08a" stroke-width="1.2" />
-        <g transform="translate(125, 135)">
-          <circle cx="0" cy="0" r="44" fill="#6b21a8" />
-          <circle cx="0" cy="0" r="32" fill="#a855f7" />
-          <circle cx="0" cy="0" r="20" fill="#e9d5ff" />
-          <circle cx="0" cy="0" r="10" fill="#fde047" />
-        </g>
-      </g>
-
-      <!-- Bottom Right Large Foreground Dahlia (Entering Frame) -->
-      <g transform="translate(920, 50)">
-        <path d="M 290 190 C 200 100, 100 90, 0 190 Z" fill="#15803d" stroke="#fef08a" stroke-width="1.2" />
-        <g transform="translate(165, 135)">
-          <circle cx="0" cy="0" r="44" fill="#be185d" />
-          <circle cx="0" cy="0" r="32" fill="#f472b6" />
-          <circle cx="0" cy="0" r="20" fill="#fde047" />
-          <circle cx="0" cy="0" r="10" fill="#ffffff" />
-        </g>
-      </g>
-    </svg>
-  `;
-}
-
-
-// â”€â”€ Falling Flower Petals System (12 Petals Drifting) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function renderFallingPetals() {
-  const container = document.getElementById('falling-petals-container');
-  if (!container) return;
-  container.innerHTML = '';
-
-  for (let i = 0; i < 12; i++) {
-    const petal = document.createElement('div');
-    petal.className = 'falling-petal';
-    const left = (i * 8.2 + Math.random() * 4) % 96;
-    const delay = Math.random() * 14;
-    const dur = 10 + Math.random() * 7;
-    const scale = 0.55 + Math.random() * 0.55;
-
-    petal.style.left = `${left}vw`;
-    petal.style.top = `-25px`;
-    petal.style.animationDelay = `-${delay}s`;
-    petal.style.animationDuration = `${dur}s`;
-    petal.style.transform = `scale(${scale})`;
-    container.appendChild(petal);
-  }
-}
-
-
-// â”€â”€ 3D Mouse / Touch Parallax & Book Opening Interaction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── 3D Mouse / Touch Parallax & Book Opening Interaction ─────────────────────
 function initParallaxAndOpening() {
-  const bgEnv = document.getElementById('bg-environment');
   const fitEl = document.getElementById('fit');
-  const fgGard = document.getElementById('fg-garden');
   const tapBtn = document.getElementById('tap-invitation');
+  const inner = document.getElementById('inner');
 
-  // Mouse Parallax Effect
+  // Mouse Parallax Effect on Scrapbook Stage
   window.addEventListener('mousemove', (e) => {
     const cx = (e.clientX / window.innerWidth - 0.5) * 2;
     const cy = (e.clientY / window.innerHeight - 0.5) * 2;
-
-    if (bgEnv) bgEnv.style.transform = `translate3d(${cx * 8}px, ${cy * 6}px, 0)`;
     if (fitEl) fitEl.style.transform = `translate3d(${cx * -12}px, ${cy * -8}px, 0)`;
-    if (fgGard) fgGard.style.transform = `translate3d(${cx * 18}px, ${cy * 12}px, 0)`;
   });
 
   // Touch / Gyro orientation fallback
@@ -1157,10 +883,7 @@ function initParallaxAndOpening() {
       if (!e.gamma || !e.beta) return;
       const cx = Math.max(-1, Math.min(1, e.gamma / 30));
       const cy = Math.max(-1, Math.min(1, e.beta / 45));
-
-      if (bgEnv) bgEnv.style.transform = `translate3d(${cx * 8}px, ${cy * 6}px, 0)`;
       if (fitEl) fitEl.style.transform = `translate3d(${cx * -12}px, ${cy * -8}px, 0)`;
-      if (fgGard) fgGard.style.transform = `translate3d(${cx * 18}px, ${cy * 12}px, 0)`;
     });
   }
 
@@ -1176,7 +899,6 @@ function initParallaxAndOpening() {
   }
 
   // Clicking on cover directly turns page
-  const inner = document.getElementById('inner');
   if (inner) {
     inner.addEventListener('click', (e) => {
       const coverEl = e.target.closest('.sheet:first-child .face.f');
@@ -1192,7 +914,7 @@ function initParallaxAndOpening() {
 }
 
 
-// â”€â”€ Sky Lanterns â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Sky Lanterns ────────────────────────────────────────────────────────────
 function launchSkyLanterns(count) {
   for (let i = 0; i < count; i++) {
     const wrapper = document.createElement('div');
@@ -1213,7 +935,7 @@ function launchSkyLanterns(count) {
   }
 }
 
-// â”€â”€ Audio Player â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Audio Player ────────────────────────────────────────────────────────────
 function initAudioPlayer() {
   const musicBtn = document.getElementById('music-btn');
   const musicLabel = document.getElementById('music-label');
@@ -1258,7 +980,7 @@ function initAudioPlayer() {
   if (musicBtn) musicBtn.addEventListener('click', toggleMusic);
 }
 
-// â”€â”€ Proposal Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Proposal Modal ──────────────────────────────────────────────────────────
 function initProposalFlow() {
   const pop = document.getElementById('pop');
   const popVideo = document.getElementById('pop-video');

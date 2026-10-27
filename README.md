@@ -4,16 +4,23 @@ An interactive, 3D animated digital scrapbook featuring realistic spiral binding
 
 ---
 
-## 🚀 Quick Start (Windows)
+## 🚀 Quick Start
 
-The simplest way to run the application on Windows:
-
+### 🪟 Windows
 1. **Double-click [`start.bat`](start.bat)** in the project root folder.
-2. The script will automatically:
-   - Verify Node.js is installed.
-   - Run `npm install` if `node_modules` is missing.
-   - Launch your browser to `http://localhost:5173`.
-   - Start the Vite development server.
+
+### 🍎 macOS
+1. **Double-click [`start.command`](start.command)** in Finder, OR run `./start.sh` in Terminal:
+   ```bash
+   chmod +x start.sh start.command   # only needed once if downloaded as zip
+   ./start.sh
+   ```
+
+Both launchers will automatically:
+- Verify Node.js is installed.
+- Run `npm install` if `node_modules` is missing.
+- Open `http://localhost:5173` in your default browser.
+- Start the Vite development server.
 
 ---
 
@@ -68,6 +75,8 @@ npm run preview
 Samantha/
 ├── index.html              # Main HTML markup & stage layout
 ├── start.bat               # 1-click launcher for Windows
+├── start.command           # 1-click launcher for macOS Finder
+├── start.sh                # Shell launcher for macOS / Linux
 ├── package.json            # Project dependencies & scripts
 ├── public/                 # Static assets (images, music, video, stickers)
 │   ├── photos/             # Photos displayed in the scrapbook
